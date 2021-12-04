@@ -23,7 +23,7 @@ def read_root():
 
 @app.post("/sendmail", tags=["sendmail"])
 def send_mail(formData: dict) -> dict:
-   mail_content = 'Hello ' + str(formData['firstName']) + str(formData['mailBody']) + '. Please do not reply to this email as this mailbox is not monitored. Thanks, Teamli.'
+    mail_content = 'Hello ' + str(formData['firstName']) + str(formData['mailBody']) + '. Please do not reply to this email as this mailbox is not monitored. Thanks, Teamli.'
     
     #The mail addresses and password
     sender_address = 'donotreplytmm@gmail.com'
