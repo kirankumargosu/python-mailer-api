@@ -3,6 +3,8 @@ from fastapi.middleware.cors import CORSMiddleware
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
+import os
+
 app = FastAPI()
 
 origins = [
@@ -21,25 +23,27 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"200": "Welcome To Mailer"}
+    return {"200": "Welcome To Gosu Mailer"}
 
 @app.post("/sendmail", tags=["sendmail"])
 def send_mail(formData: dict) -> dict:
     mail_content = 'Hello ' + str(formData['firstName']) + str(formData['mailBody']) + '. Please do not reply to this email as this mailbox is not monitored. Thanks, Teamli.'
     
     #The mail addresses and password
-    sender_address = 'donotreplytmm@gmail.com'
-    sender_pass = 'ximwoR-piknud-qoccu1'
+    
+    sender_address = os.environ.get('SENDER_EMAIL_ID')
+    sender_pass = os.environ.get('SENDER_PASSWORD')
 
-    toaddr = 'themeadgatemagazine@gmail.com'
-    bcc = ['kirankumar.gosu@gmail.com']
+    toaddr = os.environ.get('TO_EMAIL_ID')
+    bccIds = os.environ.get('BCC_EMAIL_ID')
+    bcc = [x.strip() for x in bccIds.lstrip(',').rstrip(',').split(',')]
 
     toaddrs = [toaddr] + bcc
 
     #Setup the MIME
     message = MIMEMultipart()
     message['From'] = sender_address
-    message['Subject'] = 'Teamli | Message from Teamli'
+    message['Subject'] = os.environ.get('MAIL_SUBJECT')
     #The body and the attachments for the mail
     message.attach(MIMEText(mail_content, 'plain'))
     #Create SMTP session for sending the mail
