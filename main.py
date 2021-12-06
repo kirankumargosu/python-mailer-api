@@ -5,6 +5,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
 
+from starlette.requests import Request
+
 app = FastAPI()
 
 origins = [
@@ -24,6 +26,15 @@ app.add_middleware(
 @app.get("/")
 def read_root():
     return {"data": "Welcome to the mailer - Gosu."}
+
+@app.post("/debug", tags=["sendmail"])
+def debug(request: Request) -> dict:
+    print(request.form)
+    print(request.json)
+    print(request)
+    return {
+        "data": {"Print Debug"}
+    }
 
 @app.post("/sendmail", tags=["sendmail"])
 def send_mail(formData: dict) -> dict:
