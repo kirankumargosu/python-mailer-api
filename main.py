@@ -4,8 +4,6 @@ import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
-import requests
-
 
 app = FastAPI()
 
