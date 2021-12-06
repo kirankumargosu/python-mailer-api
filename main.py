@@ -32,6 +32,9 @@ def debug(request: Request) -> dict:
     print(request.form)
     print(request.json)
     print(request)
+    dict = request.form
+    for key in dict:
+        print('form key '+dict[key])
     return {
         "data": {"Print Debug"}
     }
