@@ -23,6 +23,7 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
+    return {"data": "Welcome to the mailer - Gosu."}
 
 @app.post("/sendmail", tags=["sendmail"])
 def send_mail(formData: dict) -> dict:
@@ -56,6 +57,7 @@ def send_mail(formData: dict) -> dict:
     return {
         "data": {"Mail Sent"}
     }
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000, debug=False)
