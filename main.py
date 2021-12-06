@@ -23,10 +23,10 @@ app.add_middleware(
 
 @app.get("/")
 def read_root():
-    return {"200": "Welcome To Gosu Mailer"}
 
 @app.post("/sendmail", tags=["sendmail"])
 def send_mail(formData: dict) -> dict:
+    print(formData)
     mail_content = 'Hello ' + str(formData['firstName']) + str(formData['mailBody']) + '. Please do not reply to this email as this mailbox is not monitored. Thanks, Teamli.'
     
     #The mail addresses and password
