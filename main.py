@@ -1,11 +1,11 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.middleware.cors import CORSMiddleware
 import smtplib
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 import os
+import requests
 
-from starlette.requests import Request
 
 app = FastAPI()
 
@@ -29,9 +29,9 @@ def read_root():
 
 @app.post("/debug", tags=["debug"])
 def debug(request: Request) -> dict:
-    print(request.form)
-    print(request.json)
-    print(request)
+    print(request.form())
+    print(request.json())
+    print(request.body())
     dict = request.form
     for key in dict:
         print('form key '+dict[key])
