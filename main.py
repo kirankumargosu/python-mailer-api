@@ -30,7 +30,7 @@ def debug(request: Request) -> dict:
     print(request.form())
     print(request.json())
     print(request.body())
-    dict = request.form
+    dict = request.form()
     for key in dict:
         print('form key '+dict[key])
     return {
