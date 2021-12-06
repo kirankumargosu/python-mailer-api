@@ -27,7 +27,7 @@ app.add_middleware(
 def read_root():
     return {"data": "Welcome to the mailer - Gosu."}
 
-@app.post("/debug", tags=["sendmail"])
+@app.post("/debug", tags=["debug"])
 def debug(request: Request) -> dict:
     print(request.form)
     print(request.json)
